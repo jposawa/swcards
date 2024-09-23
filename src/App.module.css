@@ -1,0 +1,28 @@
+.app {
+  --colorWhite: #eeeeee;
+  --colorBlack: #111111;
+  --colorMain: #132d46;
+  --colorMainDark: #191e29;
+  --colorSecondary: #01c38d;
+  --colorGrey: #696e79;
+  
+  --colorTextAlternative: var(--colorGrey);
+
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: var(--colorBackground);
+  color: var(--colorText);
+}
+
+.light {
+  --colorText: var(--colorBlack);
+  --colorBackground: var(--colorWhite);
+}
+
+.dark {
+  --colorText: var(--colorWhite);
+  --colorBackground: var(--colorBlack);
+}
