@@ -1,0 +1,109 @@
+.base {
+  --baseColor: rgb(135, 130, 134);
+  --cornerColor: #222222;
+
+  padding: 10%;
+  padding-bottom: 0;
+  background: var(--baseColor);
+  font-size: 2rem;
+
+  header {
+    height: 1%;
+  }
+
+  footer {
+    width: 100%;
+    height: 20%;
+    margin-top: auto;
+    padding-top: 0.2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 35%;
+    font-size: 0.8em;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+  }
+}
+
+.signCircle {
+  --size: 1.5rem;
+  --offset: calc(var(--size) * 0.15);
+
+  position: absolute;
+  width: var(--size);
+  height: var(--size);
+  top: var(--offset);
+  right: var(--offset);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.75em;
+  background: var(--cardMainColor, purple);
+  border-radius: 50%;
+}
+
+.cardCore {
+  width: 100%;
+  height: 65%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+
+  & > span{
+    width: 100%;
+    height: 30%;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+  }
+}
+
+.valueContainer {
+  position: relative;
+  border: 2px solid var(--baseColor);
+  background: var(--colorBlack);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.triangle {
+  position: absolute;
+  width: 50%;
+  bottom: 100%;
+  clip-path: polygon(50% 50%, 100% 100%, 0 100%);
+  background: var(--baseColor);
+  aspect-ratio: 1;
+  z-index: 10;
+
+  &.inverted {
+    top: 100%;
+    bottom: auto;
+  }
+}
+
+.cardColor {
+  background: linear-gradient(
+    90deg,
+    var(--cornerColor) 0,
+    var(--cardSecondColor) 50%,
+    white,
+    var(--cardMainColor) 50%,
+    var(--cornerColor) 100%
+  );
+}
+
+.inverted {
+  transform: rotate(180deg);
+}
+
+.mainColor {
+  --cardSecondColor: var(--cardMainColor);
+}
+
+.altColor {
+  --cardMainColor: var(--cardSecondColor);
+}

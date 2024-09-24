@@ -1,15 +1,18 @@
 .cardContainer {
-  --width: calc(var(--height, 8rem) * 2/3);
-
   position: relative;
-  width: var(--width);
-  height: var(--height);
+  width: calc(var(--height, 8rem) * 0.7);
+  height: var(--height, 8rem);
   transition: all 300ms linear;
   transform-style: preserve-3d;
   perspective: 1000px;
+  transform: rotateY(180deg);
 
+  &>div {
+    border-radius: 8px;
+  }
+  
   &:hover {
-    transform: rotateY(180deg);
+    transform: rotateY(0deg);
   }
 }
 
@@ -19,9 +22,12 @@
   height: 100%;
   top: 0;
   left: 0;
-  background: blue;
   perspective: 500px;
   transform-style: preserve-3d;
   backface-visibility: hidden;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }

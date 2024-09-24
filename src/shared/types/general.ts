@@ -3,10 +3,6 @@ export enum Theme {
   Dark = "dark",
 }
 
-export enum Game {
-  Pazaak = "pazaak",
-}
-
 export enum CardBackface {
   Default = "default",
 }

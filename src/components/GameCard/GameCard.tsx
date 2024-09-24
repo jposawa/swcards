@@ -1,25 +1,31 @@
 import React from "react";
-import { CardBackface, Game } from "../../shared/types";
-
-import styles from "./GameCard.module.css";
+import {
+  CardBackface,
+  CardPazaakSpec,
+  CardType,
+  Game,
+} from "../../shared/types";
 import { Backface } from "./Backface/";
 import { CardPazaak } from "./CardPazaak";
 
-type GameCardProps = {
-  game: Game;
+import styles from "./GameCard.module.css";
+
+type GameCardProps = CardType & {
   backface?: CardBackface;
   className?: string;
   size?: string;
   style?: React.CSSProperties;
 };
 
-export const GameCard: React.FC<GameCardProps> = ({
-  game,
-  backface = CardBackface.Default,
-  className = "",
-  size = "8rem",
-  style = {},
-}) => {
+export const GameCard: React.FC<GameCardProps> = (props) => {
+  const {
+    game,
+    backface = CardBackface.Default,
+    className = "",
+    size = "8rem",
+    style = {},
+  } = props;
+
   return (
     <article
       className={`${styles.cardContainer} ${className}`}
@@ -34,7 +40,13 @@ export const GameCard: React.FC<GameCardProps> = ({
 
       {
         {
-          [Game.Pazaak]: <CardPazaak />,
+          [Game.Pazaak]: (
+            <CardPazaak
+              sign={(props as CardPazaakSpec).sign}
+              value={(props as CardPazaakSpec).value}
+            />
+          ),
+          [Game.KesselSabacc]: <></>,
         }[game]
       }
     </article>
