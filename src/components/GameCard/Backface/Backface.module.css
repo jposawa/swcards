@@ -12,3 +12,7 @@
   transform-style: preserve-3d;
   overflow: hidden;
 }
+
+.inverted {
+  transform: rotate(180deg);
+}
