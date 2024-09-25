@@ -12,6 +12,7 @@ export const Pazaak = () => {
         sign={PazaakSign.Both}
         value={1}
         size="12rem"
+        startTurned
       />
     </section>
   );
