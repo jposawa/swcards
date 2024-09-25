@@ -1,0 +1,7 @@
+.stackDeck {
+  --marginOffset: var(--offset);
+
+  position: absolute;
+  margin-left: var(--marginOffset);
+  box-shadow: var(--marginOffset) 0 0.001rem #22222211;
+}

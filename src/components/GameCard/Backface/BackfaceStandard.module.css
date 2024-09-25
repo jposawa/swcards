@@ -1,13 +1,13 @@
 .base {
-  padding: 0.25rem;
-  background: #333333;
-}
-
-.artContainer {
   --bgColor: #192b1d;
   --mainColor: #40733b;
   --mainColorLight: #a5ea6b;
 
+  padding: 0.25rem;
+  background: #444444;
+}
+
+.artContainer {
   position: relative;
   width: 100%;
   height: 100%;

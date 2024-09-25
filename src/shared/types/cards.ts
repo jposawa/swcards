@@ -16,10 +16,12 @@ export enum GameCategory {
   KesselSabacc = "kessel_sabacc",
 }
 
+export type PazaakCardValue = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | string;
+
 export type PazaakCore = {
   sign: PazaakSign;
   // There are more "pretty" ways to do this, but it could mess with code reading
-  value: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | string;
+  value: PazaakCardValue;
 };
 
 export type CardPazaakSpec = PazaakCore & {
@@ -36,10 +38,12 @@ export enum KSabaccSpecial {
   Imposter = -10,
 }
 
+export type KSabaccCardValue = KSabaccSpecial | 1 | 2 | 3 | 4 | 5 | 6;
+
 export type KesselSabacc = {
   game: GameCategory.KesselSabacc;
   deck: KSabaccDeck;
-  value: KSabaccSpecial | 1 | 2 | 3 | 4 | 5 | 6;
+  value: KSabaccCardValue;
 };
 
 // Doing like that to expect other Sabacc variants
