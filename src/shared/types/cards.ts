@@ -9,21 +9,21 @@ export enum PazaakSign {
 export type SignInfo = {
   color: string[];
   label?: string;
-}
+};
 
-export enum Game {
+export enum GameCategory {
   Pazaak = "pazaak",
   KesselSabacc = "kessel_sabacc",
 }
 
 export type PazaakCore = {
   sign: PazaakSign;
-  // There is more "pretty" ways to do this, but it could mess with code reading
-  value: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
+  // There are more "pretty" ways to do this, but it could mess with code reading
+  value: 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | string;
 };
 
 export type CardPazaakSpec = PazaakCore & {
-  game: Game.Pazaak;
+  game: GameCategory.Pazaak;
 };
 
 export enum KSabaccDeck {
@@ -37,7 +37,7 @@ export enum KSabaccSpecial {
 }
 
 export type KesselSabacc = {
-  game: Game.KesselSabacc;
+  game: GameCategory.KesselSabacc;
   deck: KSabaccDeck;
   value: KSabaccSpecial | 1 | 2 | 3 | 4 | 5 | 6;
 };

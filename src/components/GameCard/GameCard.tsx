@@ -3,7 +3,7 @@ import {
   CardBackface,
   CardPazaakSpec,
   CardType,
-  Game,
+  GameCategory,
 } from "../../shared/types";
 import { Backface } from "./Backface/";
 import { CardPazaak } from "./CardPazaak";
@@ -24,7 +24,7 @@ export const GameCard: React.FC<GameCardProps> = (props) => {
     game,
     backface = CardBackface.Default,
     className = "",
-    size = "8rem",
+    size = "12rem",
     startTurned = false,
     style = {},
     turnOnHover = false,
@@ -46,13 +46,13 @@ export const GameCard: React.FC<GameCardProps> = (props) => {
 
       {
         {
-          [Game.Pazaak]: (
+          [GameCategory.Pazaak]: (
             <CardPazaak
               sign={(props as CardPazaakSpec).sign}
               value={(props as CardPazaakSpec).value}
             />
           ),
-          [Game.KesselSabacc]: <></>,
+          [GameCategory.KesselSabacc]: <></>,
         }[game]
       }
     </article>
