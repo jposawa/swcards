@@ -14,7 +14,7 @@ type GameCardProps = CardType & {
   backface?: CardBackface;
   className?: string;
   size?: string;
-  startTurned?: boolean;
+  turned?: boolean;
   style?: React.CSSProperties;
   turnOnHover?: boolean;
 };
@@ -25,14 +25,14 @@ export const GameCard: React.FC<GameCardProps> = (props) => {
     backface = CardBackface.Default,
     className = "",
     size = "12rem",
-    startTurned = false,
+    turned = false,
     style = {},
     turnOnHover = false,
   } = props;
 
   return (
     <article
-      className={`${styles.cardContainer} ${startTurned ? styles.turned : ""} ${
+      className={`${styles.cardContainer} ${turned ? styles.turned : ""} ${
         turnOnHover ? styles.turnable : ""
       } ${className}`}
       style={

@@ -36,9 +36,17 @@ const getTableDeck = (
 };
 
 export const Pazaak = () => {
-  const [deckTable] = React.useState(getTableDeck());
+  const [deckTable, setDeckTable] = React.useState(getTableDeck());
+  const [deckTurned1, setDeckTurned1] = React.useState<number[]>([]);
 
-  const handleFlipCard = () => {};
+  const handleFlipCard = () => {
+    const topCard = deckTable[deckTable.length - 1];
+    const updatedDeckTurned1 = [...deckTurned1, topCard];
+    const _deckTable = [...deckTable];
+    _deckTable.pop();
+    setDeckTable(_deckTable);
+    setDeckTurned1(updatedDeckTurned1);
+  };
 
   return (
     <section className={styles.pageContainer}>
@@ -49,10 +57,13 @@ export const Pazaak = () => {
         <p>
           {deckTable.length} card{deckTable.length !== 1 && "s"}
         </p>
+        {deckTable.length > 0 && (
 
-        <div className={styles.actionContainer}>
-          <button onClick={handleFlipCard}>Flip top card</button>
-        </div>
+          <div className={styles.actionContainer}>
+            <button onClick={handleFlipCard}>Flip top card</button>
+          </div>
+        )}
+
 
         {deckTable.map((value, index) => (
           <GameCard
@@ -66,10 +77,33 @@ export const Pazaak = () => {
                 "--offset": `${0.02 * index}rem`,
               } as React.CSSProperties
             }
-            startTurned
+            turned
           />
         ))}
       </div>
+
+      <div className={styles.deckContainer}>
+        <h4>Turned Deck</h4>
+        <p>
+          {deckTurned1.length} card{deckTurned1.length !== 1 && "s"}
+        </p>
+
+        {deckTurned1.map((value, index) => (
+          <GameCard
+            key={`${value}-${index}`}
+            game={GameCategory.Pazaak}
+            sign={PazaakSign.Standard}
+            value={value as PazaakCardValue}
+            className={styles.stackDeck}
+            style={
+              {
+                "--offset": `${0.02 * index}rem`,
+              } as React.CSSProperties
+            }
+          />
+        ))}
+      </div>
+
     </section>
   );
 };
