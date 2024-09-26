@@ -8,6 +8,7 @@
 
 .deckContainer {
   width: 50%;
+  height: 50%;
   border: 1px solid red;
 }
 
@@ -17,4 +18,18 @@
   position: absolute;
   margin-left: var(--marginOffset);
   box-shadow: var(--marginOffset) 0 0.001rem #22222211;
+}
+.playerDecksGroup{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  border: 1px solid green; 
+}
+.tableDeckContainer{
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
