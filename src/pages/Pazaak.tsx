@@ -11,6 +11,7 @@ const getTableDeck = (
     shuffle?: boolean;
   } = {}
 ) => {
+  // Standard values
   const { numCopies = 4, shuffle = true } = options;
   const deckTableValues = [];
 
