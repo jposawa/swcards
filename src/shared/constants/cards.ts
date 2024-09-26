@@ -11,7 +11,7 @@ export const SIGN_MAP: Record<PazaakSign, SignInfo> = {
   },
   [PazaakSign.Both]: {
     color: ["blue", "red"],
-    label: "\u00b1",
+    label: "\u00b1", //Code for +-
   },
   [PazaakSign.Special]: {
     color: ["gold"],

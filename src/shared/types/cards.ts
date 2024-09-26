@@ -16,11 +16,11 @@ export enum GameCategory {
   KesselSabacc = "kessel_sabacc",
 }
 
+// There are "prettier" ways to do this, but it could mess with code reading
 export type PazaakCardValue = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | string;
 
 export type PazaakCore = {
   sign: PazaakSign;
-  // There are more "pretty" ways to do this, but it could mess with code reading
   value: PazaakCardValue;
 };
 

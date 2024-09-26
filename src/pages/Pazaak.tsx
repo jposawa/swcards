@@ -50,7 +50,7 @@ export const Pazaak = () => {
           <GameCard
             key={`${value}-${index}`}
             game={GameCategory.Pazaak}
-            sign={PazaakSign.Both}
+            sign={PazaakSign.Standard}
             value={value as PazaakCardValue}
             className={styles.stackDeck}
             style={
