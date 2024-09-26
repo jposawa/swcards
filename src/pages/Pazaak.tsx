@@ -38,6 +38,8 @@ const getTableDeck = (
 export const Pazaak = () => {
   const [deckTable] = React.useState(getTableDeck());
 
+  const handleFlipCard = () => {};
+
   return (
     <section className={styles.pageContainer}>
       <h3>Pazaak</h3>
@@ -47,6 +49,11 @@ export const Pazaak = () => {
         <p>
           {deckTable.length} card{deckTable.length !== 1 && "s"}
         </p>
+
+        <div className={styles.actionContainer}>
+          <button onClick={handleFlipCard}>Flip top card</button>
+        </div>
+
         {deckTable.map((value, index) => (
           <GameCard
             key={`${value}-${index}`}
