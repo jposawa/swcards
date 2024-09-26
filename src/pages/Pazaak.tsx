@@ -49,61 +49,60 @@ export const Pazaak = () => {
   };
 
   return (
-    <section className={styles.pageContainer}>
+    <>
       <h3>Pazaak</h3>
 
-      <div className={styles.deckContainer}>
-        <h4>Table Deck</h4>
-        <p>
-          {deckTable.length} card{deckTable.length !== 1 && "s"}
-        </p>
-        {deckTable.length > 0 && (
+      <section className={styles.decksGroup}>
+        <div className={styles.deckContainer}>
+          <h4>Table Deck</h4>
+          <p>
+            {deckTable.length} card{deckTable.length !== 1 && "s"}
+          </p>
+          {deckTable.length > 0 && (
+            <div className={styles.actionContainer}>
+              <button onClick={handleFlipCard}>Flip top card</button>
+            </div>
+          )}
 
-          <div className={styles.actionContainer}>
-            <button onClick={handleFlipCard}>Flip top card</button>
-          </div>
-        )}
+          {deckTable.map((value, index) => (
+            <GameCard
+              key={`${value}-${index}`}
+              game={GameCategory.Pazaak}
+              sign={PazaakSign.Standard}
+              value={value as PazaakCardValue}
+              className={styles.stackDeck}
+              style={
+                {
+                  "--offset": `${0.02 * index}rem`,
+                } as React.CSSProperties
+              }
+              turned
+            />
+          ))}
+        </div>
 
+        <div className={styles.deckContainer}>
+          <h4>Turned Deck</h4>
+          <p>
+            {deckTurned1.length} card{deckTurned1.length !== 1 && "s"}
+          </p>
 
-        {deckTable.map((value, index) => (
-          <GameCard
-            key={`${value}-${index}`}
-            game={GameCategory.Pazaak}
-            sign={PazaakSign.Standard}
-            value={value as PazaakCardValue}
-            className={styles.stackDeck}
-            style={
-              {
-                "--offset": `${0.02 * index}rem`,
-              } as React.CSSProperties
-            }
-            turned
-          />
-        ))}
-      </div>
-
-      <div className={styles.deckContainer}>
-        <h4>Turned Deck</h4>
-        <p>
-          {deckTurned1.length} card{deckTurned1.length !== 1 && "s"}
-        </p>
-
-        {deckTurned1.map((value, index) => (
-          <GameCard
-            key={`${value}-${index}`}
-            game={GameCategory.Pazaak}
-            sign={PazaakSign.Standard}
-            value={value as PazaakCardValue}
-            className={styles.stackDeck}
-            style={
-              {
-                "--offset": `${0.02 * index}rem`,
-              } as React.CSSProperties
-            }
-          />
-        ))}
-      </div>
-
-    </section>
+          {deckTurned1.map((value, index) => (
+            <GameCard
+              key={`${value}-${index}`}
+              game={GameCategory.Pazaak}
+              sign={PazaakSign.Standard}
+              value={value as PazaakCardValue}
+              className={styles.stackDeck}
+              style={
+                {
+                  "--offset": `${0.02 * index}rem`,
+                } as React.CSSProperties
+              }
+            />
+          ))}
+        </div>
+      </section>
+    </>
   );
 };

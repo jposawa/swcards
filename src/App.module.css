@@ -5,7 +5,7 @@
   --colorMainDark: #191e29;
   --colorSecondary: #01c38d;
   --colorGrey: #696e79;
-  
+
   --colorTextAlternative: var(--colorGrey);
 
   position: absolute;
@@ -15,6 +15,8 @@
   left: 0;
   background: var(--colorBackground);
   color: var(--colorText);
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .light {
@@ -25,4 +27,12 @@
 .dark {
   --colorText: var(--colorWhite);
   --colorBackground: var(--colorBlack);
+}
+
+.pageContainer {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
 }

@@ -1,9 +1,9 @@
 import { useRecoilState } from 'recoil';
 import { themeAtom } from './shared/state';
+import { Routes } from './pages';
 
 import './global.css'
 import styles from "./App.module.css";
-import { Routes } from './pages';
 
 function App() {
   const [theme] = useRecoilState(themeAtom);
