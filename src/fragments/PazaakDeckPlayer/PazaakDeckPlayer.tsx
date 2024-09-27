@@ -29,7 +29,7 @@ export const PazaakDeckPlayer: React.FC<PazaakDeckPlayerProps> = ({
 			className={`${styles.pazaakPlayerContainer} ${className}`}
 			style={style}
 		>
-			<h4>{playerInfo.name}</h4>
+			<h3>{playerInfo.name}</h3>
 			<p>
 				<b>Score</b>: {playerScore}
 			</p>

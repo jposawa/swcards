@@ -145,7 +145,7 @@ export const Pazaak = () => {
 								<p>
 									<button onClick={() => handleFlipCard()}>Get a card</button>
 								</p>
-
+								<br />
 								<p>
 									<button onClick={switchPlayer}>Finish turn</button>
 								</p>
