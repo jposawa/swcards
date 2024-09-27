@@ -1,6 +1,10 @@
 import React from "react";
 import { GameCard } from "../components";
-import { arrayShuffle, randomNumber } from "../shared/helpers";
+import {
+	arrayShuffle,
+	getSumPazaakDeck,
+	randomNumber,
+} from "../shared/helpers";
 import {
 	GameCategory,
 	PazaakCardValue,
@@ -48,8 +52,16 @@ export const Pazaak = () => {
 	const [deckPlayer2, setDeckPlayer2] = React.useState<PazaakCore[]>([]);
 	const [playerTurn, setPlayerTurn] = React.useState<0 | 1>(0);
 
+	const switchPlayer = () => {
+		setPlayerTurn(playerTurn === 0 ? 1 : 0);
+	};
+
 	const flipCard = React.useCallback(
-		(state: PazaakCore[], setState: (param: PazaakCore[]) => void) => {
+		(
+			state: PazaakCore[],
+			setState: (param: PazaakCore[]) => void,
+			alternateOnTarget = true
+		) => {
 			const _deckTable = [...deckTable];
 			const topCard = _deckTable[_deckTable.length - 1];
 			const updatedPlayerDeck = [
@@ -59,25 +71,44 @@ export const Pazaak = () => {
 					sign: PazaakSign.Standard,
 				} as PazaakCore,
 			];
+			const updatedScore = getSumPazaakDeck(updatedPlayerDeck);
 			_deckTable.pop();
 			setDeckTable(_deckTable);
 			setState(updatedPlayerDeck);
+
+			if (alternateOnTarget && updatedScore === 20) {
+				switchPlayer();
+			}
 		},
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 		[deckTable]
 	);
 
-	const switchPlayer = () => {
-		setPlayerTurn(playerTurn === 0 ? 1 : 0);
-	};
+	const handleFlipCard = (
+		options: {
+			alternate?: boolean;
+			explodeAlternate?: boolean;
+		} = {}
+	) => {
+		const { alternate = false, explodeAlternate = true } = options;
+		const referenceData =
+			playerTurn === 0
+				? {
+						state: deckPlayer1,
+						setState: setDeckPlayer1,
+				  }
+				: {
+						state: deckPlayer2,
+						setState: setDeckPlayer2,
+				  };
 
-	const handleFlipCard = (alternate = false) => {
-		if (playerTurn === 0) {
-			flipCard(deckPlayer1, setDeckPlayer1);
-		} else {
-			flipCard(deckPlayer2, setDeckPlayer2);
-		}
+		const currentPlayerScore = getSumPazaakDeck(referenceData.state);
 
-		if (alternate) {
+		const autoAlternate = explodeAlternate && currentPlayerScore > 20;
+
+		flipCard(referenceData.state, referenceData.setState);
+
+		if (alternate || autoAlternate) {
 			switchPlayer();
 		}
 	};

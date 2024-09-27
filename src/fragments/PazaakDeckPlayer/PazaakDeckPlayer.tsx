@@ -1,13 +1,9 @@
 import React from "react";
-import {
-	GameCategory,
-	PazaakCore,
-	PazaakSign,
-	PlayerData,
-} from "../../shared/types";
+import { GameCategory, PazaakCore, PlayerData } from "../../shared/types";
 
 import styles from "./PazaakDeckPlayer.module.css";
 import { GameCard } from "../../components";
+import { getSumPazaakDeck } from "../../shared/helpers";
 
 type PazaakDeckPlayerProps = {
 	playerInfo: PlayerData;
@@ -23,15 +19,7 @@ export const PazaakDeckPlayer: React.FC<PazaakDeckPlayerProps> = ({
 	style = {},
 }) => {
 	const playerScore = React.useMemo(() => {
-		const score = cards.reduce((currentScore, card) => {
-			let parsedValue = card.value as number;
-
-			if (card.sign === PazaakSign.Minus) {
-				parsedValue *= -1;
-			}
-
-			return currentScore + parsedValue;
-		}, 0);
+		const score = getSumPazaakDeck(cards);
 
 		return score;
 	}, [cards]);
