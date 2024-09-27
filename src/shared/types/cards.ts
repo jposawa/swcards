@@ -1,3 +1,5 @@
+import { GameCategory } from ".";
+
 export enum PazaakSign {
   Both = "both",
   Minus = "minus",
@@ -10,11 +12,6 @@ export type SignInfo = {
   color: string[];
   label?: string;
 };
-
-export enum GameCategory {
-  Pazaak = "pazaak",
-  KesselSabacc = "kessel_sabacc",
-}
 
 // There are "prettier" ways to do this, but it could mess with code reading
 export type PazaakCardValue = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | string;

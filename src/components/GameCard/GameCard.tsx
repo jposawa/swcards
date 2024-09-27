@@ -24,7 +24,7 @@ export const GameCard: React.FC<GameCardProps> = (props) => {
     game,
     backface = CardBackface.Default,
     className = "",
-    size = "12rem",
+    size,
     turned = false,
     style = {},
     turnOnHover = false,

@@ -1,6 +1,7 @@
 .base {
   --baseColor: rgb(135, 130, 134);
   --cornerColor: #222222;
+  --gradientAngle: 90deg;
 
   padding: 10%;
   padding-bottom: 0;
@@ -27,19 +28,19 @@
 }
 
 .signCircle {
-  --size: 1.5rem;
-  --offset: calc(var(--size) * 0.15);
+  --size: calc(var(--cardHeight) * 0.15);
+  --offset: calc(var(--size) * 0.5);
+  --gradientAngle: 0deg;
 
   position: absolute;
   width: var(--size);
   height: var(--size);
   top: var(--offset);
-  right: var(--offset);
+  right: calc(var(--offset) * 0.7);
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 0.75em;
-  background: var(--cardMainColor, purple);
   border-radius: 50%;
 }
 
@@ -61,6 +62,7 @@
 }
 
 .valueContainer {
+  height: calc(var(--cardHeight) / 5.2);
   position: relative;
   border: 2px solid var(--baseColor);
   background: var(--colorBlack);
@@ -68,6 +70,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.value {
+  font-size: calc(var(--cardHeight) * 0.15);
 }
 
 .triangle {
@@ -87,7 +93,7 @@
 
 .cardColor {
   background: linear-gradient(
-    90deg,
+    var(--gradientAngle),
     var(--cornerColor) 0,
     var(--cardSecondColor) 50%,
     white,
