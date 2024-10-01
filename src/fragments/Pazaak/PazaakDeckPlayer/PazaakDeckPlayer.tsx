@@ -1,9 +1,9 @@
 import React from "react";
-import { GameCategory, PazaakCore, PlayerData } from "../../shared/types";
+import { GameCategory, PazaakCore, PlayerData } from "../../../shared/types";
 
 import styles from "./PazaakDeckPlayer.module.css";
-import { GameCard } from "../../components";
-import { getSumPazaakDeck } from "../../shared/helpers";
+import { GameCard } from "../../../components";
+import { getSumPazaakDeck } from "../../../shared/helpers";
 
 type PazaakDeckPlayerProps = {
 	playerInfo: PlayerData;

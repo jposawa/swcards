@@ -1,1 +1,1 @@
-export * from "./PazaakDeckPlayer";
+export * from "./Pazaak";
