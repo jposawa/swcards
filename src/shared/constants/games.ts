@@ -14,3 +14,9 @@ export const PAZAAK_PLAYERS: PlayerData[] = [
 		matches: {},
 	},
 ];
+
+/**
+ * Time to be used by buttons to be disabled
+ * The time is set in miliseconds
+ */
+export const BUTTON_DISABLED_TIME = 800;
