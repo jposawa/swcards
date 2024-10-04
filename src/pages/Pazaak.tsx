@@ -7,10 +7,13 @@ import { currentPlayerAtom } from "../shared/state";
 import { CurrentMatchData, GameCategory } from "../shared/types";
 import { PAZAAK_PLAYERS, PAZAAK_PLAYERS_AI } from "../shared/constants";
 import { randomNumber } from "../shared/helpers";
+import { Button } from "../components";
+import { usePlayer } from "../shared/hooks";
 
 export const Pazaak = () => {
   const [activeMatch, setActiveMatch] = React.useState(false);
   const currentPlayerData = useRecoilValue(currentPlayerAtom);
+  const { activateMockAccount } = usePlayer();
 
   const newMatch = React.useMemo(() => {
     const match: CurrentMatchData = {
@@ -27,11 +30,17 @@ export const Pazaak = () => {
     match.playersList.push(humanPlayer, aiPlayer);
 
     return match;
-  }, [currentPlayerData])
+  }, [currentPlayerData]);
 
   if (activeMatch) {
     return <PazaakMatch match={newMatch} />;
   }
+
+  const callLogin = () => {
+    window.alert("Logging in with mock account");
+
+    activateMockAccount();
+  };
 
   return (
     <>
@@ -39,7 +48,13 @@ export const Pazaak = () => {
 
       {!currentPlayerData?.name ? (
         <>
-          <p>I couldn't identify you. Do you want to sign in?</p>
+          <p>
+            I couldn't identify you. Do you want to{" "}
+            <Button preset="link" onClick={callLogin}>
+              sign in
+            </Button>
+            ?
+          </p>
           <p>It's not necessary, but doing it would enable match history</p>
           <br />
         </>
@@ -53,8 +68,7 @@ export const Pazaak = () => {
         Do you want to start a <b>Pazaak</b> match?
       </p>
       <br />
-      <button
-        type="button"
+      <Button
         onClick={() => {
           setActiveMatch(true);
         }}
@@ -63,7 +77,7 @@ export const Pazaak = () => {
         }}
       >
         Start match
-      </button>
+      </Button>
     </>
   );
 };

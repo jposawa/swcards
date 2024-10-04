@@ -1,0 +1,11 @@
+.button {
+  border-style: solid;
+  border-color: transparent;
+  font-size: 1em;
+}
+
+.link {
+  background: transparent;
+  color: var(--colorText);
+  text-decoration: underline;
+}
