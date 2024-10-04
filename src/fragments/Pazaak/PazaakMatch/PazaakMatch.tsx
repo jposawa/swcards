@@ -56,6 +56,28 @@ export const PazaakMatch = () => {
   const [playerTurn, setPlayerTurn] = React.useState<0 | 1>(0);
   const [isButtonsDisabled, setIsButtonsDisabled] = React.useState(false);
 
+  const checkGameEnd = React.useCallback(() => {
+    const player1Score = getSumPazaakDeck(deckPlayer1);
+    const player2Score = getSumPazaakDeck(deckPlayer2);
+    console.table({
+      table:"tabela",
+      player1Score,
+      player2Score,
+    })
+
+    if (player1Score >= 20 || player2Score >= 20) {
+      setIsButtonsDisabled(true);
+
+      if (player1Score > player2Score) {
+        window.alert(`${PAZAAK_PLAYERS[0].name} wins!`);
+      } else if (player2Score > player1Score) {
+        window.alert(`${PAZAAK_PLAYERS[1].name} wins!`);
+      } else {
+        window.alert("It's a draw!");
+      }
+    }
+  },[deckPlayer1, deckPlayer2]);
+
   const switchPlayer = () => {
     setPlayerTurn(playerTurn === 0 ? 1 : 0);
   };
@@ -85,9 +107,13 @@ export const PazaakMatch = () => {
       if (alternateOnTarget && updatedScore === 20) {
         switchPlayer();
       }
+      setTimeout(() => {
+      checkGameEnd();
+      }, 100);
+
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [deckTable]
+    [deckTable, checkGameEnd]
   );
 
   const handleFlipCard = (
@@ -100,13 +126,13 @@ export const PazaakMatch = () => {
     const referenceData =
       playerTurn === 0
         ? {
-            state: deckPlayer1,
-            setState: setDeckPlayer1,
-          }
+          state: deckPlayer1,
+          setState: setDeckPlayer1,
+        }
         : {
-            state: deckPlayer2,
-            setState: setDeckPlayer2,
-          };
+          state: deckPlayer2,
+          setState: setDeckPlayer2,
+        };
 
     const currentPlayerScore = getSumPazaakDeck(referenceData.state);
 
@@ -116,7 +142,10 @@ export const PazaakMatch = () => {
 
     if (alternate || autoAlternate) {
       switchPlayer();
+    
     }
+  
+    
   };
 
   React.useEffect(() => {
@@ -136,7 +165,7 @@ export const PazaakMatch = () => {
     setTimeout(() => {
       setIsButtonsDisabled(scoreCurrentPlayer >= 20);
     }, BUTTON_DISABLED_TIME);
-  }, [deckTable]);
+  }, [deckPlayer1, deckPlayer2, deckTable, playerTurn]);
 
   const currentPlayer = React.useMemo(() => {
     const activePlayer = PAZAAK_PLAYERS[playerTurn];
