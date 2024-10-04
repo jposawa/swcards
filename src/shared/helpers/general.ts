@@ -32,12 +32,13 @@ export function arrayShuffle<T>(baseArray: T[]): T[] {
  *
  * @returns {number}
  */
-export const randomNumber = (min: number, max: number): number => {
+export const randomNumber = (min: number, max: number, includeMax = true): number => {
   const minCeiled = Math.ceil(min);
   const maxFloored = Math.floor(max);
+  const maxOffset = 1 * Number(includeMax);
 
   const randomValue = Math.floor(
-    Math.random() * (maxFloored - minCeiled + 1) + minCeiled
+    Math.random() * (maxFloored - minCeiled + maxOffset) + minCeiled
   );
 
   return randomValue;

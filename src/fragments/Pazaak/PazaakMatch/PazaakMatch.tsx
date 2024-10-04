@@ -6,18 +6,20 @@ import {
   randomNumber,
 } from "../../../shared/helpers";
 import {
+  CurrentMatchData,
   GameCategory,
   PazaakCardValue,
   PazaakCore,
   PazaakSign,
 } from "../../../shared/types";
 import { PazaakDeckPlayer } from "../../../fragments";
-import {
-  BUTTON_DISABLED_TIME,
-  PAZAAK_PLAYERS,
-} from "../../../shared/constants";
+import { BUTTON_DISABLED_TIME } from "../../../shared/constants";
 
 import styles from "./PazaakMatch.module.css";
+
+type PazaakMatchProp = {
+  match: CurrentMatchData;
+};
 
 const getTableDeck = (
   options: {
@@ -49,7 +51,7 @@ const getTableDeck = (
   return deckTableValues;
 };
 
-export const PazaakMatch = () => {
+export const PazaakMatch: React.FC<PazaakMatchProp> = ({ match }) => {
   const [deckTable, setDeckTable] = React.useState(getTableDeck());
   const [deckPlayer1, setDeckPlayer1] = React.useState<PazaakCore[]>([]);
   const [deckPlayer2, setDeckPlayer2] = React.useState<PazaakCore[]>([]);
@@ -119,6 +121,10 @@ export const PazaakMatch = () => {
     }
   };
 
+  const playersList = React.useMemo(() => {
+    return match.playersList;
+  }, [match]);
+
   React.useEffect(() => {
     const rawRandomValue = randomNumber(1, 100);
     // The chosen player index will be 0 or 1, to match the array
@@ -136,13 +142,13 @@ export const PazaakMatch = () => {
     setTimeout(() => {
       setIsButtonsDisabled(scoreCurrentPlayer >= 20);
     }, BUTTON_DISABLED_TIME);
-  }, [deckTable]);
+  }, [deckPlayer1, deckPlayer2, deckTable, playerTurn]);
 
   const currentPlayer = React.useMemo(() => {
-    const activePlayer = PAZAAK_PLAYERS[playerTurn];
+    const activePlayer = playersList[playerTurn];
 
     return activePlayer;
-  }, [playerTurn]);
+  }, [playerTurn, playersList]);
 
   return (
     <>
@@ -199,15 +205,9 @@ export const PazaakMatch = () => {
         </div>
 
         <div className={styles.playerDecksGroup}>
-          <PazaakDeckPlayer
-            playerInfo={PAZAAK_PLAYERS[0]}
-            cards={deckPlayer1}
-          />
+          <PazaakDeckPlayer playerInfo={playersList[0]} cards={deckPlayer1} />
 
-          <PazaakDeckPlayer
-            playerInfo={PAZAAK_PLAYERS[1]}
-            cards={deckPlayer2}
-          />
+          <PazaakDeckPlayer playerInfo={playersList[1]} cards={deckPlayer2} />
         </div>
       </section>
     </>
