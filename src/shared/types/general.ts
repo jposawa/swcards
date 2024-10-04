@@ -12,17 +12,34 @@ export enum GameCategory {
   KesselSabacc = "kessel_sabacc",
 }
 
-export type MatchData = {
-  id: string;
-  category: GameCategory;
-  winnerId: string;
-  date: Date;
+export enum BehaviorType {
+  Standard,
+  Agressive,
 }
 
 export type PlayerData = {
   id: string;
   name: string;
   email: string;
-  matches: Record<string, MatchData>;
+  matches: Record<string, CurrentMatchData>;
   activeMatch?: string;
+  token?: string;
+  behaviorModule?: BehaviorType;
+};
+
+export type MatchData = {
+  id: string;
+  category: GameCategory;
+  date: Date;
+  playerIds: string[];
+  winnerId?: string | "draw"; //Undefined winner means it's still active
+  playersList?: PlayerData[];
+};
+
+export type CurrentMatchData = Omit<MatchData, "playerIds"> & {
+  playersList: PlayerData[];
+};
+
+export enum StorageKey {
+  Players = "playersList",
 }
